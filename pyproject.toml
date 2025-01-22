@@ -17,6 +17,8 @@ dependencies = [
 [dependency-groups]
 dev = [
     "pre-commit-uv>=4.1.4",
+    "pytest-cov>=6.0.0",
+    "scim2-client[httpx]>=0.5.1",
     "tox-uv>=1.16.0",
 ]
 

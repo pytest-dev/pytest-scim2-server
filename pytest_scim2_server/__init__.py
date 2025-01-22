@@ -12,7 +12,6 @@ from scim2_server.utils import load_default_schemas
 @pytest.fixture(scope="session")
 def scim2_server():
     """SCIM2 server running in a thread."""
-
     backend = InMemoryBackend()
     provider = SCIMProvider(backend)
 

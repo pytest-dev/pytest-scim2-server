@@ -1,3 +1,7 @@
+# 0.1.2 - 2025-01-27
+
+- Initial GHA workflow.
+
 # 0.1.1 - 2025-01-27
 
 - The fixture returns a dataclass object instead of a tuple.

@@ -1,6 +1,6 @@
 # pytest-scim2-server
 
-SCIM2 server fixture pour Pytest
+SCIM2 server fixture for Pytest
 
 ## Installation
 

@@ -1,4 +1,4 @@
-# 0.1.3 - Unreleased
+# 0.1.3 - 2025-03-28
 
 - Option to disable the server request logging.
 

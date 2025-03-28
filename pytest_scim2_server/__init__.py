@@ -1,6 +1,7 @@
 import threading
-import wsgiref.simple_server
 from dataclasses import dataclass
+from wsgiref.simple_server import WSGIRequestHandler
+from wsgiref.simple_server import make_server
 
 import portpicker
 import pytest
@@ -20,6 +21,19 @@ class Server:
     app: SCIMProvider
     """The scim2-server WSGI application."""
 
+    logging: bool = False
+    """Whether the request access log is enabled."""
+
+    def make_request_handler(self):
+        server = self
+
+        class RequestHandler(WSGIRequestHandler):
+            def log_request(self, code="-", size="-"):
+                if server.logging:
+                    super().log_request(code, size)
+
+        return RequestHandler
+
 
 @pytest.fixture(scope="session")
 def scim2_server():
@@ -35,12 +49,15 @@ def scim2_server():
 
     host = "localhost"
     port = portpicker.pick_unused_port()
-    httpd = wsgiref.simple_server.make_server(host, port, provider)
+
+    server = Server(port=port, app=provider)
+
+    httpd = make_server(
+        host, port, provider, handler_class=server.make_request_handler()
+    )
 
     server_thread = threading.Thread(target=httpd.serve_forever)
     server_thread.start()
-
-    server = Server(port=port, app=provider)
 
     try:
         yield server

@@ -1,3 +1,7 @@
+# 0.1.3 - Unreleased
+
+- Option to disable the server request logging.
+
 # 0.1.2 - 2025-01-27
 
 - Initial GHA workflow.

@@ -36,8 +36,8 @@ class Server:
 
 
 @pytest.fixture(scope="session")
-def scim2_server():
-    """SCIM2 server running in a thread."""
+def scim2_server_app():
+    """SCIM2 server WSGI application."""
     backend = InMemoryBackend()
     provider = SCIMProvider(backend)
 
@@ -47,13 +47,19 @@ def scim2_server():
     for resource_type in load_default_resource_types().values():
         provider.register_resource_type(resource_type)
 
+    return provider
+
+
+@pytest.fixture(scope="session")
+def scim2_server(scim2_server_app):
+    """SCIM2 server running in a thread."""
     host = "localhost"
     port = portpicker.pick_unused_port()
 
-    server = Server(port=port, app=provider)
+    server = Server(port=port, app=scim2_server_app)
 
     httpd = make_server(
-        host, port, provider, handler_class=server.make_request_handler()
+        host, port, scim2_server_app, handler_class=server.make_request_handler()
     )
 
     server_thread = threading.Thread(target=httpd.serve_forever)

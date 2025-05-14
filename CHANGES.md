@@ -1,3 +1,7 @@
+# 0.1.5 - 2025-05-14
+
+- Add the `scim2_server_app` fixture.
+
 # 0.1.4 - 2025-05-11
 
 - Python package metadata update.

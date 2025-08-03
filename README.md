@@ -44,3 +44,11 @@ def test_scim2_server(scim_client):
     users = scim_client.query(User)
     assert users.resources[0].id == response.id
 ```
+
+## Related projects
+
+If you are working with SCIM and Python you might also want to have a look at:
+- [scim2-models](https://scim2-models.readthedocs.io)
+- [scim2-client](https://scim2-client.readthedocs.io)
+- [scim2-cli](https://scim2-cli.readthedocs.io)
+- [scim2-tester](https://scim2-tester.readthedocs.io)

@@ -1,3 +1,7 @@
+# 0.1.6 - 2025-01-14
+
+- Add the `scim2_server_object` fixture.
+
 # 0.1.5 - 2025-05-14
 
 - Add the `scim2_server_app` fixture.

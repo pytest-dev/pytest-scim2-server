@@ -51,22 +51,29 @@ def scim2_server_app():
 
 
 @pytest.fixture(scope="session")
-def scim2_server(scim2_server_app):
+def scim2_server_object(scim2_server_app):
+    """SCIM2 server object."""
+    port = portpicker.pick_unused_port()
+    return Server(port=port, app=scim2_server_app)
+
+
+@pytest.fixture(scope="session")
+def scim2_server(scim2_server_object):
     """SCIM2 server running in a thread."""
     host = "localhost"
-    port = portpicker.pick_unused_port()
-
-    server = Server(port=port, app=scim2_server_app)
 
     httpd = make_server(
-        host, port, scim2_server_app, handler_class=server.make_request_handler()
+        host,
+        scim2_server_object.port,
+        scim2_server_object.app,
+        handler_class=scim2_server_object.make_request_handler(),
     )
 
     server_thread = threading.Thread(target=httpd.serve_forever)
     server_thread.start()
 
     try:
-        yield server
+        yield scim2_server_object
     finally:
         httpd.shutdown()
         server_thread.join()

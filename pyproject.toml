@@ -1,6 +1,6 @@
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["uv_build>=0.12.16,<0.13.0"]
+build-backend = "uv_build"
 
 [project]
 name = "pytest-scim2-server"
@@ -8,7 +8,8 @@ version = "0.1.6"
 description = "SCIM2 server fixture for Pytest"
 readme = "README.md"
 requires-python = ">=3.10"
-license = {file = "LICENSE"}
+license = "MIT"
+license-files = ["LICENSE"]
 keywords = ["pytest", "fixture", "scim", "scim2", "rfc7643", "rfc7644"]
 dependencies = [
     "portpicker>=1.6.0",
@@ -24,13 +25,15 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
-    "License :: OSI Approved :: MIT License",
     "Programming Language :: Python",
     "Operating System :: OS Independent",
 ]
 
 [project.urls]
 repository = "https://gitlab.com/pytest-dev/pytest-scim2-server"
+
+[tool.uv.build-backend]
+module-root = ""
 
 [dependency-groups]
 dev = [

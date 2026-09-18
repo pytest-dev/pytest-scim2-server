@@ -30,7 +30,7 @@ classifiers = [
 ]
 
 [project.urls]
-repository = "https://gitlab.com/pytest-dev/pytest-scim2-server"
+repository = "https://github.com/pytest-dev/pytest-scim2-server"
 
 [tool.uv.build-backend]
 module-root = ""

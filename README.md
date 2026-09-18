@@ -15,6 +15,7 @@ pytest-scim2-server creates a ``scim2_server`` fixture that runs an instance of 
 ```python
 import requests
 
+
 def test_scim_foobar(scim2_server):
     res = request.get(f"http://localhost:{scim2_server.port}")
     ...

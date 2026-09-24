@@ -25,8 +25,8 @@ Note that you can use [scim2-client](https://scim2-client.readthedocs.io) to int
 
 ```python
 import pytest
-from httpx import Client
-from scim2_client.engines.httpx import SyncSCIMClient
+from httpx2 import Client
+from scim2_client.engines.httpx2 import SyncSCIMClient
 
 
 @pytest.fixture(scope="session")

@@ -1,6 +1,6 @@
 import pytest
-from httpx import Client
-from scim2_client.engines.httpx import SyncSCIMClient
+from httpx2 import Client
+from scim2_client.engines.httpx2 import SyncSCIMClient
 
 
 @pytest.fixture(scope="session")

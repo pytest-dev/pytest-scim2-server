@@ -16,7 +16,7 @@ env:
 jobs:
   tests:
     name: py${{ matrix.python }} unit tests
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
@@ -39,7 +39,7 @@ jobs:
 
   minversions:
     name: minimum dependency versions
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     env:
       UV_RESOLUTION: lowest-direct
       UV_LOCKED: 0
@@ -56,7 +56,7 @@ jobs:
         run: uv run pytest --showlocals
 
   style:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
     - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
     - uses: pre-commit/action@2c7b3805fd2a0fd8c1884dcaebf91fc102a13ecd # v3.0.1

@@ -1,3 +1,7 @@
+# Unreleased
+
+- Python 3.11 is now the minimum supported version.
+
 # 0.1.6 - 2025-01-14
 
 - Add the `scim2_server_object` fixture.

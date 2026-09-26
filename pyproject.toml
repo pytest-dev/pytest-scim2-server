@@ -7,7 +7,7 @@ name = "pytest-scim2-server"
 version = "0.1.6"
 description = "SCIM2 server fixture for Pytest"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 license = "MIT"
 license-files = ["LICENSE"]
 keywords = ["pytest", "fixture", "scim", "scim2", "rfc7643", "rfc7644"]
@@ -21,10 +21,10 @@ maintainers = [{name="Éloi Rivard", email="eloi@yaal.coop"}]
 classifiers = [
     "Intended Audience :: Developers",
     "Development Status :: 4 - Beta",
-    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Programming Language :: Python",
     "Operating System :: OS Independent",
 ]
@@ -84,10 +84,10 @@ docstring-code-format = true
 requires = ["tox>=4.19"]
 env_list = [
     "style",
-    "py310",
     "py311",
     "py312",
     "py313",
+    "py314",
     "minversions",
 ]
 

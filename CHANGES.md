@@ -1,5 +1,6 @@
 # Unreleased
 
+- **Breaking:** scim2-server 0.3.0 is now required. The `scim2_server_app` fixture returns a `SCIMApplication` serving the default schemas and resource types.
 - Python 3.11 is now the minimum supported version.
 
 # 0.1.6 - 2025-01-14

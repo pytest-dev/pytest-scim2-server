@@ -6,9 +6,8 @@ from wsgiref.simple_server import make_server
 import portpicker
 import pytest
 from scim2_server.backend import InMemoryBackend
-from scim2_server.provider import SCIMProvider
-from scim2_server.utils import load_default_resource_types
-from scim2_server.utils import load_default_schemas
+from scim2_server.provider import SCIMApplication
+from scim2_server.utils import load_default_provider
 
 
 @dataclass
@@ -18,7 +17,7 @@ class Server:
     port: int
     """The port on which the local http server listens."""
 
-    app: SCIMProvider
+    app: SCIMApplication
     """The scim2-server WSGI application."""
 
     logging: bool = False
@@ -38,16 +37,7 @@ class Server:
 @pytest.fixture(scope="session")
 def scim2_server_app():
     """SCIM2 server WSGI application."""
-    backend = InMemoryBackend()
-    provider = SCIMProvider(backend)
-
-    for schema in load_default_schemas().values():
-        provider.register_schema(schema)
-
-    for resource_type in load_default_resource_types().values():
-        provider.register_resource_type(resource_type)
-
-    return provider
+    return SCIMApplication(InMemoryBackend(), load_default_provider())
 
 
 @pytest.fixture(scope="session")

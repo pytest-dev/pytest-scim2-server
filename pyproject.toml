@@ -4,7 +4,7 @@ build-backend = "uv_build"
 
 [project]
 name = "pytest-scim2-server"
-version = "0.1.6"
+version = "0.2.0"
 description = "SCIM2 server fixture for Pytest"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -41,7 +41,7 @@ module-root = ""
 
 [dependency-groups]
 dev = [
-    "pre-commit-uv>=4.1.4",
+    "prek>=0.5.3",
     "pytest-cov>=6.0.0",
     "scim2-client[httpx2]>=0.9.0",
     "tox-uv>=1.16.0",
@@ -93,7 +93,7 @@ env_list = [
 
 [tool.tox.env_run_base]
 runner = "uv-venv-lock-runner"
-with_dev = true
+dependency_groups = ["dev"]
 commands = [
     ["pytest", "--showlocals", "--full-trace", "{posargs}"],
 ]
@@ -101,10 +101,9 @@ commands = [
 [tool.tox.env.style]
 runner = "uv-venv-runner"
 commands = [
-    ["pre-commit", "run", "--all-files", "--show-diff-on-failure"],
+    ["prek", "run", "--all-files", "--show-diff-on-failure"],
 ]
 
 [tool.tox.env.minversions]
-runner = "uv-venv-lock-runner"
-with_dev = true
+runner = "uv-venv-runner"
 uv_resolution = "lowest-direct"

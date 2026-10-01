@@ -1,4 +1,5 @@
 import threading
+from collections.abc import Iterator
 from dataclasses import dataclass
 from wsgiref.simple_server import WSGIRequestHandler
 from wsgiref.simple_server import make_server
@@ -23,11 +24,11 @@ class Server:
     logging: bool = False
     """Whether the request access log is enabled."""
 
-    def make_request_handler(self):
+    def make_request_handler(self) -> type[WSGIRequestHandler]:
         server = self
 
         class RequestHandler(WSGIRequestHandler):
-            def log_request(self, code="-", size="-"):
+            def log_request(self, code: int | str = "-", size: int | str = "-") -> None:
                 if server.logging:
                     super().log_request(code, size)
 
@@ -35,20 +36,20 @@ class Server:
 
 
 @pytest.fixture(scope="session")
-def scim2_server_app():
+def scim2_server_app() -> SCIMApplication:
     """SCIM2 server WSGI application."""
     return SCIMApplication(InMemoryBackend(), load_default_provider())
 
 
 @pytest.fixture(scope="session")
-def scim2_server_object(scim2_server_app):
+def scim2_server_object(scim2_server_app: SCIMApplication) -> Server:
     """SCIM2 server object."""
     port = portpicker.pick_unused_port()
     return Server(port=port, app=scim2_server_app)
 
 
 @pytest.fixture(scope="session")
-def scim2_server(scim2_server_object):
+def scim2_server(scim2_server_object: Server) -> Iterator[Server]:
     """SCIM2 server running in a thread."""
     host = "localhost"
 

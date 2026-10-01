@@ -1,3 +1,8 @@
+# Unreleased
+
+- The package ships a `py.typed` marker, so type checkers use its annotations.
+- The code is checked with mypy in strict mode.
+
 # 0.2.0 - 2026-09-18
 
 - **Breaking:** scim2-server 0.3.0 is now required. The `scim2_server_app` fixture returns a `SCIMApplication` serving the default schemas and resource types.

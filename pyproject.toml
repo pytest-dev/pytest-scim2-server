@@ -41,10 +41,12 @@ module-root = ""
 
 [dependency-groups]
 dev = [
+    "mypy>=2.3.1",
     "prek>=0.5.3",
     "pytest-cov>=6.0.0",
     "scim2-client[httpx2]>=0.9.0",
     "tox-uv>=1.16.0",
+    "types-portpicker>=1.6.0.20260508",
 ]
 
 [project.entry-points."pytest11"]
@@ -79,6 +81,10 @@ force-single-line = true
 
 [tool.ruff.format]
 docstring-code-format = true
+
+[tool.mypy]
+files = ["pytest_scim2_server"]
+strict = true
 
 [tool.tox]
 requires = ["tox>=4.19"]

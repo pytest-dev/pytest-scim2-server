@@ -14,7 +14,7 @@ keywords = ["pytest", "fixture", "scim", "scim2", "rfc7643", "rfc7644"]
 dependencies = [
     "portpicker>=1.6.0",
     "pytest>=8.3.4",
-    "scim2-server>=0.3.0",
+    "scim2-server>=0.5.0",
 ]
 authors = [{name="Yaal Coop", email="contact@yaal.coop"}]
 maintainers = [{name="Éloi Rivard", email="eloi@yaal.coop"}]

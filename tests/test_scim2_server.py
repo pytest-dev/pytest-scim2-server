@@ -5,7 +5,7 @@ from scim2_client.engines.httpx2 import SyncSCIMClient
 
 @pytest.fixture(scope="session")
 def scim_client(scim2_server):
-    http_client = Client(base_url=f"http://localhost:{scim2_server.port}")
+    http_client = Client(base_url=f"http://localhost:{scim2_server.port}/v2")
     scim_client = SyncSCIMClient(http_client)
     scim_client.discover()
     return scim_client

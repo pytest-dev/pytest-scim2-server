@@ -6,8 +6,11 @@ from wsgiref.simple_server import make_server
 
 import portpicker
 import pytest
-from scim2_server.backend import InMemoryBackend
-from scim2_server.provider import SCIMApplication
+from scim2_models import ScimProvider
+from scim2_server.applications.wsgi import WSGIApplication
+from scim2_server.memory import InMemoryStorage
+from scim2_server.service import ScimService
+from scim2_server.storage import ScimStorage
 from scim2_server.utils import load_default_provider
 
 
@@ -18,7 +21,7 @@ class Server:
     port: int
     """The port on which the local http server listens."""
 
-    app: SCIMApplication
+    app: WSGIApplication
     """The scim2-server WSGI application."""
 
     logging: bool = False
@@ -36,13 +39,35 @@ class Server:
 
 
 @pytest.fixture(scope="session")
-def scim2_server_app() -> SCIMApplication:
-    """SCIM2 server WSGI application."""
-    return SCIMApplication(InMemoryBackend(), load_default_provider())
+def scim2_server_provider() -> ScimProvider:
+    """SCIM2 server provider, with the default schemas and resource types."""
+    return load_default_provider()
 
 
 @pytest.fixture(scope="session")
-def scim2_server_object(scim2_server_app: SCIMApplication) -> Server:
+def scim2_server_storage() -> ScimStorage:
+    """Storage of the SCIM2 server resources, in memory."""
+    return InMemoryStorage()
+
+
+@pytest.fixture(scope="session")
+def scim2_server_service(scim2_server_provider: ScimProvider) -> ScimService:
+    """SCIM2 server service, built upon the provider."""
+    return ScimService(scim2_server_provider)
+
+
+@pytest.fixture(scope="session")
+def scim2_server_app(
+    scim2_server_storage: ScimStorage, scim2_server_service: ScimService
+) -> WSGIApplication:
+    """SCIM2 server WSGI application, serving the service over the storage."""
+    return WSGIApplication(
+        scim2_server_storage, scim2_server_service.provider, scim2_server_service
+    )
+
+
+@pytest.fixture(scope="session")
+def scim2_server_object(scim2_server_app: WSGIApplication) -> Server:
     """SCIM2 server object."""
     port = portpicker.pick_unused_port()
     return Server(port=port, app=scim2_server_app)

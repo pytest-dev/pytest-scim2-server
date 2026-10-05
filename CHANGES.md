@@ -1,4 +1,4 @@
-# Unreleased
+# 0.3.0 - 2026-10-05
 
 - **Breaking:** scim2-server 0.5.0 is now required. The `scim2_server_app` fixture returns a `WSGIApplication` that keeps the resources in an `InMemoryStorage`.
 - The `scim2_server_provider`, `scim2_server_storage` and `scim2_server_service` fixtures build the server. Override them to change the server.

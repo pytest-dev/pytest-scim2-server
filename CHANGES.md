@@ -1,3 +1,7 @@
+# 0.3.1 - Unreleased
+
+- Python 3.15 is supported.
+
 # 0.3.0 - 2026-10-05
 
 - **Breaking:** scim2-server 0.5.0 is now required. The `scim2_server_app` fixture returns a `WSGIApplication` that keeps the resources in an `InMemoryStorage`.
